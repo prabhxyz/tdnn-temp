@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <script src="bower_components/platform/platform.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="import" href="g-spectrogram.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <!-- <script src="../model23.js"></script> -->
+    <!-- <script src="tf_params.js" type="module"></script> -->
+  </head>
+  <body>
+    <div class="header-wrapper">
+      <div class="header-content">
+        <h2>Time-Delay Neural Network Demo</h2>
+      </div>
+      <div class="btn-bar">
+        <!-- <div class="show-btn" id="file-write-btn">Start File Write</div> -->
+        <div class="show-btn" id="predict-btn">Record Sample</div>
+        <!-- <div class="show-btn" id="switch-act-btn">Switch</div> -->
+        <div class="show-btn" id="download">Download</div>
+        <!-- <a href="explain.html"><div class="show-btn" id="explain">Explain</div></a> -->
+        <!-- <a href="weight.html"><div class="show-btn" id="weight">See Weights</div></a> -->
+        <!-- <div class="show-btn" id="store-in-browser">Store Data</div> -->
+        <div class="show-btn" id="start-stop-btn">Pause</div>
+      </div>
+      <div class="instructions">
+        <h3>Instructions</h3>
+        <p>The <span class="highlight1">switch</span> button toggles <span class="highlight2">start write file</span> and 
+          <span class="highlight3">record and sample</span>. <span class="highlight2">start write file</span>
+          allows you to record a sample of the spectrogram, and will be written into a text file and downloaded. 
+          <span class="highlight3">record and sample</span> will record you, then sample from the selcted recording
+          time frame, then process the data to output a prediction. The browser will save your latest sample recorded, and
+          you can proceed to the <span class="highlight4">explain</span> button to see how the TDNN model processed the spectrogram
+          to produce the result.</p>
+        <p id="debug-dump"></p>
+      </div>
+    </div>
+    <div class="body-wrapper-index">
+      <div class="spectrograms">
+        <div class="spectrogram-wrapper" id="main-spectrogram">
+          <g-spectrogram controls labels log oscillator ></g-spectrogram>
+        </div>
+        <div>
+        <div class="spectrogram-wrapper-mini" id="mini-spectrogram">
+          <g-spectrogram-mini controls labels log oscillator speed="10"></g-spectrogram>
+        </div>
+      </div>
+      <div class="predictions">
+        Predictions 
+        <div class="pred-outer-wrapper">
+          <ul class="pred-wrapper">
+            <li>b<div id="pred1"></div><div id="pred1_text" class="pred-label">0</div></li>
+            <li>d<div id="pred2"></div><div id="pred2_text" class="pred-label">0</div></li>
+            <li>g<div id="pred3"></div><div id="pred3_text" class="pred-label">0</div></li>
+            <!-- <li>null<div id="pred4"></div></li> -->
+          </ul>
+          </div>
+          <div class="pred-class-wrapper">
+            prediction: <span id="predClass"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="custom-button-wrappers">
+      <div class="custom-btn" id="spec-left">Left <-- </div>
+      <div class="custom-btn" id="spec-right">Right --\> > </div>
+      <div class="custom-btn" id="spec-pred">Predict</div>
+    </div>
+    </div>
+  </body>
+</html>
